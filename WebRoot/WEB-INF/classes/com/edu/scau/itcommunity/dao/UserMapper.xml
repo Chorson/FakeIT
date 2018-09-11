@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.scau.itcommunity.dao.UserDao">	
+
+
+
+	<!-- 查询SQL -->
+	<select id="findAll" resultType="User">
+		select * from userinfo
+	</select>
+	
+	<!-- 增加SQL -->
+	<insert id="save" parameterType="User">
+		insert into userinfo(user_id,user_password,user_name,user_tel,user_email,user_img) values (#{user_id},#{user_password},#{user_name},#{user_tel},#{user_email},#{user_img})
+	</insert>
+
+	<!-- 删除SQL 
+	<delete id="delete" parameterType="int">
+		delete from usertbl where uid=#{uid}
+	</delete>
+	-->
+	<!-- 修改SQL -->
+	<update id="update" parameterType="User">
+		update userinfo set user_password=#{user_password},experience=#{experience},user_name=#{user_name},user_tel=#{user_tel},user_email=#{user_email},user_like=#{user_like},user_img=#{user_img} where user_id=#{user_id}
+	</update>
+  
+	<!-- 根据ID  SQL -->
+	<select id="findById" parameterType="string" resultType="User">
+         select * from userinfo where user_id=#{user_id}
+    </select>
+    
+    <!-- 根据ID  SQL -->
+	<select id="searchByUsername" parameterType="string" resultType="User">
+         select * from userinfo where user_name like #{user_name}
+    </select>
+    
+    <select id="findWhiteUser" resultType="User">
+    	select *from userinfo where user_id not in (select user_id from user_blacklist)
+    </select>
+    <select id="getCount" resultType="int">
+    	select count(user_id) from userinfo 
+    </select>
+    
+</mapper>

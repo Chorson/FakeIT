@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+   
+ 	<typeAliases>
+      <typeAlias alias="User" type="com.edu.scau.itcommunity.entity.User"/> 
+      <typeAlias alias="Blacklist" type="com.edu.scau.itcommunity.entity.Blacklist"/> 
+      <typeAlias alias="Categories" type="com.edu.scau.itcommunity.entity.Categories"/> 
+      <typeAlias alias="Collections" type="com.edu.scau.itcommunity.entity.Collections"/> 
+      <typeAlias alias="Comment" type="com.edu.scau.itcommunity.entity.Comment"/> 
+      <typeAlias alias="Logs" type="com.edu.scau.itcommunity.entity.Logs"/> 
+      <typeAlias alias="Message" type="com.edu.scau.itcommunity.entity.Message"/> 
+      <typeAlias alias="Subscribe" type="com.edu.scau.itcommunity.entity.Subscribe"/> 
+      <typeAlias alias="Note" type="com.edu.scau.itcommunity.entity.Note"/> 
+   </typeAliases>  
+   <!-- 配置Mapper文件的路径 -->
+   <mappers>
+       <mapper resource="com/edu/scau/itcommunity/dao/UserMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/BlacklistMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/CategoriesMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/CollectionsMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/CommentMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/LogsMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/MessageMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/SubscribeMapper.xml"/>
+       <mapper resource="com/edu/scau/itcommunity/dao/NoteMapper.xml"/>
+       
+   </mappers>
+   
+</configuration>

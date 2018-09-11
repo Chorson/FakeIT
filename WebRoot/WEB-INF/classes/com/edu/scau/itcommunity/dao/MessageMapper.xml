@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.scau.itcommunity.dao.MessageDao">	
+
+	<!-- 查询SQL -->
+	<select id="findByMessageId" parameterType="int" resultType="Message">
+		select * from messageinfo where message_id = #{message_id}
+	</select>
+
+	<!-- 查询SQL -->
+	<select id="findByPosterId" parameterType="string" resultType="Message">
+		select * from messageinfo where poster = #{poster}  
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="findByGetterId" parameterType="string" resultType="Message">
+		select * from messageinfo where getter = #{getter} order by create_time desc
+	</select>
+	
+	<!-- 增加SQL -->
+	<insert id="save" parameterType="Message" useGeneratedKeys="true" keyProperty="message_id">
+		insert into messageinfo(poster,getter,poster_name,content) values (#{poster},#{getter},#{poster_name},#{content})
+	</insert>
+
+	<!-- 删除SQL -->
+	<delete id="delete" parameterType="int">
+		delete from messageinfo where message_id=#{message_id}
+	</delete>
+	
+    <update id="update" parameterType="int">
+		update messageinfo set isread=1 where message_id=#{message_id}
+	</update>
+</mapper>

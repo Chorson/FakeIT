@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.scau.itcommunity.dao.SubscribeDao">	
+
+	<!-- 查询SQL -->
+	<select id="findById" parameterType="string" resultType="User">
+		select * from subscribe ,userinfo where subscribe_userid = #{subscribe_userid} and subscribed__userid=user_id
+	</select>
+	<!-- 增加SQL -->
+	<insert id="save" parameterType="Subscribe">
+		insert into subscribe(subscribe_userid,subscribed__userid) values (#{subscribe_userid},#{subscribed__userid})
+	</insert>
+
+	<!-- 删除SQL -->
+	<delete id="delete" parameterType="Subscribe">
+		delete from subscribe where subscribed__userid=#{subscribed__userid}
+	</delete>
+</mapper>

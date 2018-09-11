@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.edu.scau.itcommunity.dao.NoteDao">	
+
+
+
+	<!-- 查询SQL -->
+	<select id="findAll" resultType="Note">
+		select * from noteinfo 
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="findNewAll" resultType="Note">
+		select * from noteinfo order by create_time desc
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="findHotAll" resultType="Note">
+		select * from noteinfo order by visitor_number desc
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="findNewShare" resultType="Note">
+		select * from noteinfo where type='share' order by create_time desc
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="findNewQuestion" resultType="Note">
+		select * from noteinfo where type='question' order by create_time desc
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="findHotShare" resultType="Note">
+		select * from noteinfo where type='share' order by visitor_number desc
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="findHotQuestion" resultType="Note">
+		select * from noteinfo where type='question' order by visitor_number desc
+	</select>
+	
+	<!-- 查询SQL -->
+	<select id="searchByTitle" resultType="Note">
+		select * from noteinfo where note_title like #{note_title} order by visitor_number desc
+	</select>
+	
+	<!-- 增加SQL -->
+	<insert id="save" parameterType="Note" useGeneratedKeys="true" keyProperty="note_id">
+		insert into noteinfo(note_title,poster_id,categories_id,type,poster_name) values (#{note_title},#{poster_id},#{categories_id},#{type},#{poster_name})
+	</insert>
+
+	<!-- 删除SQL -->
+	<delete id="delete" parameterType="int">
+		delete from noteinfo where note_id=#{note_id}
+	</delete>
+	
+	<!-- 修改SQL -->
+	<update id="update" parameterType="int">
+		update noteinfo set visitor_number=visitor_number+1 where note_id=#{note_id}
+	</update>
+	
+	<!-- 根据ID  SQL -->
+	<select id="findByPosterId" parameterType="string" resultType="Note">
+         select * from noteinfo where poster_id=#{poster_id}
+    </select>
+    
+    <select id="findByPosterName" parameterType="string" resultType="Note">
+         select * from noteinfo where poster_id like #{poster_name}
+    </select>
+    
+	<!-- 根据ID  SQL -->
+	<select id="findNewByCategoriesId" parameterType="int" resultType="Note">
+         select * from noteinfo where categories_id=#{categories_id} order by create_time desc
+    </select>
+    
+    <!-- 根据ID  SQL -->
+	<select id="findHotByCategoriesId" parameterType="int" resultType="Note">
+         select * from noteinfo where categories_id=#{categories_id} order by visitor_number desc
+    </select>
+    
+    <!-- 根据ID  SQL -->
+	<select id="findByCategoriesId" parameterType="int" resultType="Note">
+         select * from noteinfo where categories_id=#{categories_id}
+    </select>
+    
+	<!-- 根据ID  SQL -->
+	<select id="findByType" parameterType="string" resultType="Note">
+         select * from noteinfo where type=#{type}
+    </select>
+    
+    
+    <!-- 根据ID  SQL -->
+	<select id="findByNoteId" parameterType="int" resultType="Note">
+         select * from noteinfo where note_id=#{note_id}
+    </select>
+    
+     <!-- 根据ID  SQL -->
+	<select id="showSubscribeNote" parameterType="string" resultType="Note">
+        select *from noteinfo where poster_id in (select subscribed__userid from subscribe where subscribe_userid=#{subscribe_userid}) order by create_time desc
+    </select>
+    
+    <select id="getVisitSum"  resultType="int">
+        select sum(visitor_number) from noteinfo 
+    </select>
+    
+    <select id="getCount"  resultType="int">
+        select count(note_id) from noteinfo 
+    </select>
+    
+</mapper>
